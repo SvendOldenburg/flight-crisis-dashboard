@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Crisis Dashboard</title>
+  <meta name="description" content="Real-time flight risk monitoring during geopolitical instability.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <noscript>
+    <div style="padding:40px;text-align:center;color:#ffc400;font-family:monospace;">
+      This dashboard requires JavaScript to render data.
+    </div>
+  </noscript>
+
+  <div class="dashboard" id="dashboard">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header__title">
+        Flight Crisis <span>Dashboard</span>
+      </div>
+      <div class="header__meta">
+        <span class="header__updated" id="headerUpdated">--</span>
+        <div class="header__dot seed" id="headerDot"></div>
+      </div>
+    </header>
+
+    <!-- FLIGHT SEARCH -->
+    <section class="panel search-panel" id="searchPanel">
+      <div class="panel__label">Check Any Flight</div>
+      <form class="search-form" id="searchForm" autocomplete="off">
+        <div class="search-form__fields">
+          <div class="search-form__field">
+            <label class="search-form__label" for="searchOrigin">From</label>
+            <input class="search-form__input" type="text" id="searchOrigin" placeholder="e.g. HKT, BKK, SGN" maxlength="3">
+          </div>
+          <div class="search-form__arrow">&#8594;</div>
+          <div class="search-form__field">
+            <label class="search-form__label" for="searchDest">To</label>
+            <input class="search-form__input" type="text" id="searchDest" placeholder="e.g. CPH, SIN, NRT" maxlength="3">
+          </div>
+          <div class="search-form__field">
+            <label class="search-form__label" for="searchAirline">Airline (optional)</label>
+            <select class="search-form__select" id="searchAirline">
+              <option value="">Any / Don't know</option>
+              <option value="airasia">AirAsia</option>
+              <option value="thaiairways">Thai Airways</option>
+              <option value="vietnamairlines">Vietnam Airlines</option>
+              <option value="vietjet">VietJet Air</option>
+              <option value="cebu">Cebu Pacific</option>
+              <option value="bangkokairways">Bangkok Airways</option>
+              <option value="nokair">Nok Air</option>
+              <option value="lionair">Lion Air</option>
+              <option value="other-budget">Other budget carrier</option>
+              <option value="other-flag">Other flag carrier</option>
+            </select>
+          </div>
+          <div class="search-form__field">
+            <label class="search-form__label" for="searchDate">Date (optional)</label>
+            <input class="search-form__input" type="date" id="searchDate">
+          </div>
+          <button class="search-form__btn" type="submit">Assess Risk</button>
+        </div>
+      </form>
+      <div class="search-result" id="searchResult" style="display:none;">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- OVERALL RISK -->
+    <section class="panel risk-overview" id="riskOverview">
+      <div class="risk-ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="risk-ring__bg" cx="60" cy="60" r="52"></circle>
+          <circle class="risk-ring__fill" id="riskRingFill" cx="60" cy="60" r="52"
+            stroke-dasharray="326.73"
+            stroke-dashoffset="326.73"></circle>
+        </svg>
+        <div class="risk-ring__score" id="riskScore">--</div>
+      </div>
+      <div class="risk-overview__text">
+        <div class="risk-overview__label-tag unknown" id="riskLabel">LOADING</div>
+        <p class="risk-overview__summary" id="riskSummary">Loading dashboard data...</p>
+      </div>
+    </section>
+
+    <!-- FLIGHTS -->
+    <section class="flights-grid" id="flightsGrid">
+      <!-- Populated by JS -->
+    </section>
+
+    <!-- FUEL & OIL -->
+    <section class="panel" id="fuelPanel">
+      <div class="panel__label">Fuel &amp; Oil</div>
+      <div id="fuelContent">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- GEOPOLITICAL + ROUTE RISK -->
+    <div class="split-grid">
+      <section class="panel" id="geoPanel">
+        <div class="panel__label">Geopolitical</div>
+        <div id="geoContent">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+      <section class="panel" id="routePanel">
+        <div class="panel__label">Route Risk</div>
+        <div id="routeContent">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+    </div>
+
+    <!-- AIRLINE HEALTH -->
+    <section class="panel" id="airlinePanel">
+      <div class="panel__label">Airline Health</div>
+      <div class="airline-grid" id="airlineGrid">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- RECOMMENDATIONS -->
+    <section class="panel recommendations" id="recPanel">
+      <div class="panel__label">Action Recommendations</div>
+      <div id="recContent">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- OIL & FUEL PRICE TIMELINE -->
+    <section class="panel" id="oilTimelinePanel">
+      <div class="panel__label">Oil &amp; Fuel Price Timeline (Since Conflict)</div>
+      <div id="oilTimelineContent">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- CANCELLATION TREND -->
+    <section class="panel" id="cancellationTimelinePanel">
+      <div class="panel__label">Flight Disruption Timeline (Since Conflict)</div>
+      <div id="cancellationTimelineContent">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- SEA AIRLINE OVERVIEW -->
+    <section class="panel" id="seaAirlinePanel">
+      <div class="panel__label">Southeast Asia Airline Overview</div>
+      <div id="seaAirlineContent">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- BROADER CONTEXT -->
+    <section class="panel" id="broaderContextPanel">
+      <div class="panel__label">Broader Context: Regional Fuel Policies &amp; Developments</div>
+      <div id="broaderContextContent">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      Data sourced by Claude via web search. Not financial or safety advice. Verify critical decisions independently.
+    </footer>
+
+  </div>
+
+  <script src="data/status-inline.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

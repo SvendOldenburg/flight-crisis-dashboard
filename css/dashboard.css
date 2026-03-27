@@ -1,0 +1,1120 @@
+/* ============================================
+   FLIGHT CRISIS DASHBOARD
+   Ops-room aesthetic. Dark. Data-dense. Clear.
+   ============================================ */
+
+/* --- Reset & Base --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Backgrounds */
+  --bg-primary: #07080c;
+  --bg-panel: #0d0e14;
+  --bg-panel-alt: #10111a;
+  --bg-header: #0a0b10;
+  --border: #1a1b28;
+  --border-light: #252638;
+
+  /* Text */
+  --text-primary: #d8d9e4;
+  --text-secondary: #8a8b9e;
+  --text-muted: #4e4f62;
+  --text-dim: #2e2f3e;
+
+  /* Status */
+  --green: #00e676;
+  --green-dim: rgba(0, 230, 118, 0.10);
+  --green-border: rgba(0, 230, 118, 0.25);
+  --yellow: #ffc400;
+  --yellow-dim: rgba(255, 196, 0, 0.10);
+  --yellow-border: rgba(255, 196, 0, 0.25);
+  --red: #ff1744;
+  --red-dim: rgba(255, 23, 68, 0.10);
+  --red-border: rgba(255, 23, 68, 0.25);
+
+  /* Accent */
+  --accent: #448aff;
+  --accent-dim: rgba(68, 138, 255, 0.10);
+
+  /* Spacing */
+  --gap: 14px;
+  --panel-pad: 20px;
+  --radius: 6px;
+
+  /* Fonts */
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --font-body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+}
+
+html {
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* --- Grain overlay --- */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+}
+
+/* --- Scanline effect --- */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+/* --- Layout Shell --- */
+.dashboard {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--gap);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+/* --- Header --- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px var(--panel-pad);
+  background: var(--bg-header);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.header__title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.header__title span {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.header__meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.header__updated {
+  color: var(--text-secondary);
+}
+
+.header__updated.fresh {
+  color: var(--green);
+}
+
+.header__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.header__dot.stale { background: var(--yellow); }
+.header__dot.seed { background: var(--text-muted); animation: none; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* --- Panels (shared) --- */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--panel-pad);
+}
+
+.panel__label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+/* --- Search Panel --- */
+.search-panel {
+  border: 1px solid var(--border-light);
+}
+
+.search-form__fields {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.search-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 100px;
+}
+
+.search-form__arrow {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  padding-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.search-form__label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.search-form__input,
+.search-form__select {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-form__input::placeholder {
+  color: var(--text-dim);
+}
+
+.search-form__input:focus,
+.search-form__select:focus {
+  border-color: var(--accent);
+}
+
+.search-form__input[type="text"] {
+  text-transform: uppercase;
+}
+
+.search-form__select {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234e4f62' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+}
+
+.search-form__select option {
+  background: var(--bg-panel);
+  color: var(--text-primary);
+}
+
+.search-form__btn {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bg-primary);
+  background: var(--accent);
+  border: none;
+  border-radius: 4px;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.search-form__btn:hover {
+  background: #5a9aff;
+}
+
+.search-form__btn:active {
+  transform: scale(0.97);
+}
+
+/* Search Result */
+.search-result {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.search-result__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.search-result__route {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.search-result__score-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.search-result__score {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.search-result__score.green { color: var(--green); }
+.search-result__score.yellow { color: var(--yellow); }
+.search-result__score.red { color: var(--red); }
+
+.search-result__score-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.search-result__factors {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.search-result__factor {
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+
+.search-result__factor-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.search-result__factor-value {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.search-result__disclaimer {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  margin-top: 12px;
+}
+
+.search-result__close {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.search-result__close:hover {
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+/* --- Overall Risk --- */
+.risk-overview {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 28px var(--panel-pad);
+}
+
+.risk-ring {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
+}
+
+.risk-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.risk-ring__bg {
+  fill: none;
+  stroke: var(--border-light);
+  stroke-width: 6;
+}
+
+.risk-ring__fill {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.2s ease, stroke 0.4s ease;
+}
+
+.risk-ring__score {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.risk-overview__text {
+  flex: 1;
+}
+
+.risk-overview__label-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+
+.risk-overview__label-tag.stable { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
+.risk-overview__label-tag.elevated { background: var(--yellow-dim); color: var(--yellow); border: 1px solid var(--yellow-border); }
+.risk-overview__label-tag.high { background: var(--red-dim); color: var(--red); border: 1px solid var(--red-border); }
+.risk-overview__label-tag.critical { background: var(--red-dim); color: var(--red); border: 1px solid var(--red-border); animation: flash 1s ease-in-out infinite; }
+.risk-overview__label-tag.unknown { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(68,138,255,0.25); }
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.risk-overview__summary {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 700px;
+}
+
+/* --- Flight Cards --- */
+.flights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+
+.flight-card {
+  border-left: 3px solid var(--text-muted);
+}
+
+.flight-card.green { border-left-color: var(--green); }
+.flight-card.yellow { border-left-color: var(--yellow); }
+.flight-card.red { border-left-color: var(--red); }
+
+.flight-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.flight-card__airline {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.flight-card__status {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 3px;
+}
+
+.flight-card__status.green { background: var(--green-dim); color: var(--green); }
+.flight-card__status.yellow { background: var(--yellow-dim); color: var(--yellow); }
+.flight-card__status.red { background: var(--red-dim); color: var(--red); }
+.flight-card__status.unknown { background: var(--accent-dim); color: var(--accent); }
+
+.flight-card__route {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.flight-card__date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.flight-card__countdown {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.flight-card__countdown-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+.flight-card__risk-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.flight-card__risk-score {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.flight-card__risk-track {
+  flex: 1;
+  height: 4px;
+  background: var(--border-light);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.flight-card__risk-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.8s ease;
+}
+
+.flight-card__risk-fill.green { background: var(--green); }
+.flight-card__risk-fill.yellow { background: var(--yellow); }
+.flight-card__risk-fill.red { background: var(--red); }
+
+.flight-card__section-title {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+
+.flight-card__list {
+  list-style: none;
+  padding: 0;
+}
+
+.flight-card__list li {
+  position: relative;
+  padding-left: 14px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+
+.flight-card__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.flight-card__list.risks li::before { background: var(--red); }
+.flight-card__list.mitigations li::before { background: var(--green); }
+
+/* --- Two-column panels --- */
+.split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+
+/* --- Fuel & Oil Panel --- */
+.fuel-stats {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.fuel-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.fuel-stat__value {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.fuel-stat__change {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.fuel-stat__change.up { color: var(--red); }
+.fuel-stat__change.down { color: var(--green); }
+.fuel-stat__change.neutral { color: var(--text-muted); }
+
+.fuel-stat__label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.fuel-impact {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.fuel-impact__label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.fuel-summary {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+.detail-list {
+  list-style: none;
+  padding: 0;
+}
+
+.detail-list li {
+  position: relative;
+  padding-left: 14px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+
+.detail-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+/* --- Geopolitical Panel --- */
+.geo-threat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.geo-threat__label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.geo-item {
+  margin-bottom: 12px;
+}
+
+.geo-item__title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.geo-item__text {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.airspace-list {
+  list-style: none;
+  padding: 0;
+}
+
+.airspace-list li {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.airspace-list li:last-child { border-bottom: none; }
+
+/* --- Route Risk Panel --- */
+.route-item {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.route-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+.route-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.route-item__codes {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.route-item__notes {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --- Airline Health Panel --- */
+.airline-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+
+.airline-card {
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.airline-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.airline-card__name {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.airline-stat {
+  margin-bottom: 8px;
+}
+
+.airline-stat__label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.airline-stat__value {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* --- Status Badges (reusable) --- */
+.badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.badge.green, .badge.stable, .badge.clear { background: var(--green-dim); color: var(--green); }
+.badge.yellow, .badge.elevated, .badge.caution { background: var(--yellow-dim); color: var(--yellow); }
+.badge.red, .badge.high, .badge.critical, .badge.danger { background: var(--red-dim); color: var(--red); }
+.badge.unknown, .badge.seed { background: var(--accent-dim); color: var(--accent); }
+
+/* --- Recommendations --- */
+.recommendations {
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--border-light);
+}
+
+.rec-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rec-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.rec-item__priority {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.rec-item__body {
+  flex: 1;
+}
+
+.rec-item__action {
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.rec-item__deadline {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* --- Timeline Table --- */
+.timeline-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.timeline-table th {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.timeline-table td {
+  padding: 8px 12px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.timeline-table tr:last-child td { border-bottom: none; }
+
+.timeline-table .date-col {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  width: 110px;
+}
+
+.timeline-table .value-col {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.timeline-table .highlight-row td {
+  background: var(--red-dim);
+}
+
+.timeline-table .current-row td {
+  background: var(--yellow-dim);
+}
+
+.timeline-table .event-col {
+  font-size: 0.85rem;
+}
+
+/* --- SEA Airline Overview --- */
+.sea-airline-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+
+.sea-airline-card {
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  border-left: 3px solid var(--text-muted);
+}
+
+.sea-airline-card.budget { border-left-color: var(--yellow); }
+.sea-airline-card.flag { border-left-color: var(--accent); }
+
+.sea-airline-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.sea-airline-card__name {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.sea-airline-card__type {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sea-airline-card__impact {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+.sea-airline-card__detail {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* --- Broader Context --- */
+.context-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+
+.context-item {
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.context-item__country {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.context-item__date {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+}
+
+.context-item__text {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.context-narrative {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* --- Section Divider --- */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 4px 0;
+}
+
+/* --- Footer --- */
+.footer {
+  text-align: center;
+  padding: 16px;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+/* --- Data quality indicator --- */
+.data-quality-warning {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--yellow-dim);
+  border: 1px solid var(--yellow-border);
+  border-radius: var(--radius);
+  font-size: 0.72rem;
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  margin-bottom: 14px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 8px;
+    gap: 10px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .risk-overview {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .flights-grid,
+  .split-grid,
+  .airline-grid,
+  .sea-airline-grid,
+  .context-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-table { font-size: 0.8rem; }
+  .timeline-table .date-col { width: 80px; }
+
+  .search-form__fields { flex-direction: column; }
+  .search-form__arrow { display: none; }
+  .search-form__btn { width: 100%; }
+  .search-result__factors { grid-template-columns: 1fr; }
+
+  .fuel-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .flight-card__countdown {
+    font-size: 1.1rem;
+  }
+
+  .risk-ring {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  html { font-size: 13px; }
+
+  .header__title {
+    font-size: 0.6rem;
+  }
+}
