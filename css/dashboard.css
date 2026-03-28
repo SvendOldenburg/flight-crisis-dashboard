@@ -455,6 +455,55 @@ body {
   max-width: 700px;
 }
 
+/* --- Saved Flights Toggle --- */
+.saved-flights {
+  margin-top: var(--gap);
+}
+
+.saved-flights__toggle {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 10px var(--panel-pad);
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+  user-select: none;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.saved-flights__toggle::-webkit-details-marker { display: none; }
+
+.saved-flights__toggle::before {
+  content: '+ ';
+  color: var(--accent);
+}
+
+.saved-flights[open] > .saved-flights__toggle::before {
+  content: '- ';
+}
+
+.saved-flights[open] > .saved-flights__toggle {
+  border-color: var(--border-light);
+  color: var(--text-primary);
+  border-radius: var(--radius) var(--radius) 0 0;
+  border-bottom: none;
+}
+
+.saved-flights[open] > .flights-grid {
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: var(--panel-pad);
+  background: var(--bg-panel);
+}
+
 /* --- Flight Cards --- */
 .flights-grid {
   display: grid;
