@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "lastUpdated": "2026-03-27T18:00:00+07:00",
-  "overallRisk": "ELEVATED",
-  "overallScore": 6.6,
+  "lastUpdated": "2026-03-28T20:00:00+07:00",
+  "overallRisk": "HIGH",
+  "overallScore": 7.2,
   "flights": [
     {
       "id": "flight-1",
@@ -15,17 +15,18 @@
       "status": "YELLOW",
       "riskScore": 7,
       "risks": [
-        "Vietnam facing jet fuel shortage after China and Thailand halted fuel exports",
-        "Budget carriers most vulnerable to 40-60% fuel cost spike",
-        "VietJet already facing flight cuts from April 2026 onwards; AirAsia likely similar",
-        "184 cancellations across Asia on Mar 10 alone, AirAsia among hardest hit",
-        "Vietnam Airlines already cut 15% of scheduled flights through March 31"
+        "Vietnam jet fuel shortage deepening: Vietnam Airlines cutting 23 weekly flights and suspending 7 domestic routes from April 1",
+        "Bloomberg reports Vietnamese airlines slashing flights from April on jet fuel crunch (Mar 27)",
+        "Budget carriers most vulnerable: AirAsia has no significant fuel hedging against 47% fuel cost spike since January",
+        "Jet A-1 at SEA hubs now $1.89-$2.12/litre, up 47% from January 2026",
+        "Vietnam imports 60%+ of jet fuel from China and Thailand, both of which have banned exports"
       ],
       "mitigations": [
-        "Short-haul route (2hr) limits fuel exposure per flight",
+        "Short-haul route (2hr, 956km) limits fuel exposure per flight",
+        "Thai AirAsia still operating CXR-DMK 7x weekly (FD647) as of late March",
         "SEA airspace completely unaffected by Middle East closures",
-        "Route is domestic within ASEAN, lower geopolitical risk",
-        "3+ weeks until departure allows time to monitor and pivot"
+        "Carriers projecting schedule restoration by April 10-15 if fuel shipments arrive as expected",
+        "3 weeks until departure allows time to monitor and pivot to VietJet or Vietnam Airlines CXR-BKK"
       ]
     },
     {
@@ -37,41 +38,43 @@
       "destination": "CPH",
       "date": "2026-04-27",
       "status": "YELLOW",
-      "riskScore": 5,
+      "riskScore": 6,
       "risks": [
-        "Middle East airspace closures force rerouting via Caucasus or Egypt-Saudi-Oman corridor",
-        "Expect 90 min to 3 hours additional flight time due to detours",
-        "Thai Airways raised ticket prices 10-15% to cover increased fuel costs",
-        "Multiple FIRs closed: Iran, Iraq, Kuwait, Syria; Israel/UAE/Qatar heavily restricted"
+        "Middle East airspace closures force rerouting: Iran, Iraq, Kuwait, Syria FIRs all closed by NOTAM",
+        "Expect 90 min to 3 hours additional flight time via southern (Egypt-Saudi-Oman) or northern (Caucasus) corridor",
+        "Brent crude hit $112.57/bbl on Mar 28 (highest since July 2022), Thai Airways raised prices 10-15%",
+        "Iran rejected US peace talks Mar 26, removing near-term hope of airspace reopening",
+        "Oman Air cancelled CPH flights until April 15, indicating European route stress across carriers"
       ],
       "mitigations": [
-        "Thai Airways is a flag carrier with government backing, more resilient than budget airlines",
-        "BKK-CPH direct route still operating with rerouting",
-        "Suvarnabhumi (BKK) actually benefiting from rerouted traffic, increasing capacity",
-        "Northern routing via Central Asia is established and functioning",
-        "Thai Airways managing better than most carriers in the region"
+        "Thai Airways is a government-backed flag carrier, most resilient carrier on this route",
+        "BKK-CPH direct route still operating with rerouting and minimal schedule impact",
+        "Southern route (Egypt-Saudi-Oman corridor) is established and currently favored by most carriers",
+        "BKK benefiting from rerouted traffic, increasing capacity at Suvarnabhumi",
+        "30 days until departure provides buffer for situation changes"
       ]
     }
   ],
   "fuelOil": {
-    "brentCrude": 107.99,
-    "brentChange": "+2.0%",
-    "jetFuelIndex": 197.0,
-    "jetFuelChange": "+12.6%",
-    "summary": "Brent crude at $107.99/bbl after Iran rejected US peace talks. Jet fuel spiked to $197/bbl (up 12.6% week-on-week), roughly double pre-crisis levels of ~$90-95/bbl. The Strait of Hormuz disruption continues to drive prices.",
-    "impactOnBudgetAirlines": "HIGH",
+    "brentCrude": 112.57,
+    "brentChange": "+4.2%",
+    "jetFuelIndex": 227.4,
+    "jetFuelChange": "+15.4%",
+    "summary": "Brent crude closed at $112.57/bbl on Mar 28, highest since July 2022, up 4.2% on the day after Iran rejected US peace talks. Jet A1 imported from Singapore at $227.4/bbl. Prices have roughly doubled from pre-crisis levels (~$88-95/bbl).",
+    "impactOnBudgetAirlines": "CRITICAL",
     "details": [
-      "Jet fuel prices 40-60% above pre-crisis levels, projected to persist through Q2 2026",
-      "China and Thailand halted jet fuel exports, directly impacting Vietnam aviation fuel supply",
-      "Vietnam fuel delivery timelines extended from 30 days to 50+ days",
-      "Industry analysts project disruption persists through Q2 unless Middle East stability improves",
-      "Oil market in backwardation, signaling supply tightness expected to continue"
+      "Jet A-1 at SEA hubs now $1.89-$2.12/litre, up 47% from January 2026",
+      "Jet fuel prices rose from ~$95/bbl in late Feb to $227.4/bbl by late March, more than doubling",
+      "China and Thailand fuel export bans still in effect, directly cutting Vietnam's supply",
+      "Vietnam fuel delivery timelines extended from 30 to 50+ days",
+      "Oil market in backwardation, signaling continued supply tightness through Q2",
+      "Vietnam Airlines planning 10-20% monthly flight cuts next quarter if jet fuel stays above $160-200/bbl"
     ],
     "dataQuality": "HIGH"
   },
   "geopolitical": {
     "threatLevel": "HIGH",
-    "iranConflict": "Active conflict. US-Israeli strikes on Iranian military targets in Feb 2026 prompted Iranian missile/drone retaliation. Iran rejected direct US peace talks on Mar 26, reigniting fears of prolonged Strait of Hormuz disruption through Q2.",
+    "iranConflict": "Active conflict. US-Israeli strikes on Iran in Feb 2026 prompted retaliation. Iran rejected direct US peace talks on Mar 26. Strait of Hormuz effectively closed to commercial traffic since Mar 2, disrupting ~17.8M bbl/day of oil flows. No near-term resolution expected.",
     "airspaceClosures": [
       "Iran (OIIX FIR) -- CLOSED to commercial aviation",
       "Iraq (ORBB FIR) -- CLOSED",
@@ -80,39 +83,40 @@
       "Israel (LLLL FIR) -- RESTRICTED, limited PPR only",
       "Bahrain, UAE, Qatar -- HEAVILY RESTRICTED, short-notice closures possible"
     ],
-    "regionalStability": "Southeast Asia airspace stable and unaffected by direct conflict. However, fuel supply chains disrupted. Thailand acting as transit hub for rerouted Europe-Asia traffic. No direct security threat to SEA aviation.",
+    "regionalStability": "Southeast Asia airspace stable and unaffected by direct conflict. However, fuel supply chains severely disrupted. Thailand acting as transit hub for rerouted Europe-Asia traffic. No direct security threat to SEA aviation.",
     "details": [
-      "Iranian drones crossed Iran-Azerbaijan border on Mar 5, struck Nakhchivan airport",
+      "Iranian drones struck Nakhchivan airport (Azerbaijan) on Mar 5, first spillover into Caucasus",
       "Traditional Gulf corridor for Europe-Asia flights effectively unavailable",
-      "Rerouting via Caucasus-Afghanistan (north) or Egypt-Saudi-Oman (south)",
-      "AeroThai reports 1,000+ flights cancelled due to Gulf crisis through mid-March"
+      "Two rerouting corridors in use: Southern (Egypt-Saudi-Oman, +90min) and Northern (Caucasus-Central Asia, +2-3hrs)",
+      "AeroThai reports 1,000+ flights cancelled in Thailand alone due to Gulf crisis",
+      "Tourism arrivals to Thailand dropped 9% in early March, 18% decline from Europe/Middle East specifically"
     ],
     "dataQuality": "HIGH"
   },
   "airlineHealth": {
     "airasia": {
       "status": "CAUTION",
-      "cancellationRate": "Elevated. Among hardest-hit carriers in Mar 10 wave of 184 Asian cancellations",
-      "financialHealth": "Budget carrier with thin margins. Fuel cost spike of 40-60% severely impacts profitability. No significant fuel hedging.",
-      "recentDisruptions": "Multiple disruption events in Feb-Mar 2026. 247 delays on Feb 13. Part of Mar 10 mass cancellations. Thai AirAsia reporting ongoing delays at BKK and HKT."
+      "cancellationRate": "Elevated. Among hardest-hit carriers in Mar 10 wave (184 cancellations across Asia). Affiliate revenue losses exceeding $180M for Q1.",
+      "financialHealth": "Budget carrier with thin margins, no significant fuel hedging. Fuel cost spike of 47% since January severely impacts profitability.",
+      "recentDisruptions": "Multiple disruption events in Feb-Mar 2026. Philippines AirAsia suspended Manila-HCMC 3x weekly through May. Thai AirAsia still operating CXR-DMK daily but under pressure."
     },
     "thaiAirways": {
       "status": "STABLE",
-      "cancellationRate": "Near normal. 74 delays reported but managing better than most carriers.",
-      "financialHealth": "Government-backed flag carrier, post-restructuring. Better positioned to absorb fuel costs. Raised prices 10-15%.",
-      "recentDisruptions": "Rerouting European services with minimal schedule impact. Operating BKK-CPH with northern detour. Some delays at BKK due to increased transit traffic."
+      "cancellationRate": "Near normal. 74 delays but managing better than most carriers. Rerouting European services with minimal schedule impact.",
+      "financialHealth": "Government-backed flag carrier, post-restructuring. Absorbing fuel costs via 10-15% ticket price increases. Better positioned than budget carriers.",
+      "recentDisruptions": "BKK-CPH operating with rerouting via southern or northern corridor. Some delays at BKK due to increased transit traffic."
     }
   },
   "routeRisk": {
     "cxrToDmk": {
       "airspaceStatus": "CLEAR",
       "rerouting": false,
-      "notes": "SEA airspace completely unaffected by Middle East closures. The risk here is fuel supply, not airspace. Vietnam's fuel shortage from halted Chinese/Thai exports could force schedule reductions on this route."
+      "notes": "SEA airspace unaffected by Middle East closures. Risk is fuel supply, not airspace. Vietnam's jet fuel shortage from halted Chinese/Thai exports could force schedule reductions. Vietnamese airlines coordinated pullback announced Mar 28; restoration projected by April 10-15 if fuel shipments arrive."
     },
     "bkkToCph": {
       "airspaceStatus": "REROUTING REQUIRED",
       "rerouting": true,
-      "notes": "Traditional Gulf corridor unavailable. Thai Airways rerouting via northern (Caucasus/Central Asia) or southern (Egypt-Saudi-Oman) corridors. Adds 90min to 3hrs flight time. Route still operating, but longer and more expensive."
+      "notes": "Traditional Gulf corridor unavailable. Thai Airways rerouting via southern (Egypt-Saudi-Oman, +90min, currently favored) or northern (Caucasus/Central Asia, +2-3hrs) corridors. Route still operating but longer and more expensive. Oman Air cancelled CPH flights until April 15."
     }
   },
   "recommendations": {
@@ -120,22 +124,22 @@
     "actions": [
       {
         "priority": "HIGH",
-        "action": "Check AirAsia CXR-DMK booking status weekly. If Vietnam fuel cuts extend into April or AirAsia announces schedule reductions on this route, book a backup flight immediately (VietJet or Vietnam Airlines CXR to BKK).",
-        "deadline": "By April 10"
+        "action": "Check AirAsia CXR-DMK booking status weekly. Vietnamese airlines announced coordinated flight cuts from April 1. If AirAsia FD647 shows as cancelled or rescheduled, book VietJet or Vietnam Airlines CXR to BKK immediately.",
+        "deadline": "Check weekly, next check April 4"
       },
       {
         "priority": "HIGH",
-        "action": "Consider moving Nha Trang to Bangkok departure earlier (before April 15) if Vietnam Airlines or AirAsia announce further April flight cuts. The fuel export halt from China/Thailand is the primary threat.",
+        "action": "Consider moving Nha Trang departure earlier (before April 15) if fuel situation worsens. Carriers project schedule restoration by April 10-15 only IF fuel shipments arrive. If they don't, deeper cuts are coming.",
         "deadline": "Decision by April 5"
       },
       {
         "priority": "MEDIUM",
-        "action": "Thai Airways BKK-CPH is operating with rerouting. Expect 1.5-3hr longer flight. No action needed yet, but confirm booking closer to date and check for schedule changes.",
+        "action": "Thai Airways BKK-CPH still operating with rerouting. Expect 1.5-3hr longer flight. Confirm booking status closer to date. Check if schedule changes or further price increases are announced.",
         "deadline": "Check by April 20"
       },
       {
         "priority": "LOW",
-        "action": "If situation escalates significantly (oil above $120, additional airspace closures, Thai Airways suspends European routes), evaluate alternative routing: BKK to CPH via Istanbul (Turkish Airlines) or via Helsinki (Finnair) as backup options.",
+        "action": "If Brent stays above $115 or additional airspace closures occur, evaluate backup routing: BKK to CPH via Istanbul (Turkish Airlines) or via Helsinki (Finnair).",
         "deadline": "Only if escalation"
       }
     ]
@@ -152,7 +156,8 @@
     { "date": "Mar 9", "brent": "$120", "jetFuel": "~$157", "event": "Peak spike. Near halt in Strait of Hormuz tanker traffic. 65% increase from Feb 27.", "highlight": "highlight-row" },
     { "date": "Mar 13", "brent": "$100", "jetFuel": "~$140", "event": "Partial correction. Still up 37% from pre-war. IATA warns of sudden price challenge.", "highlight": "" },
     { "date": "Mar 23", "brent": "$92", "jetFuel": "~$160", "event": "Brent eases but jet fuel stays elevated due to supply chain lag.", "highlight": "" },
-    { "date": "Mar 26", "brent": "$107.99", "jetFuel": "$197/bbl", "event": "Iran rejects US peace talks. Prices reignite. Jet fuel up 12.6% week-on-week.", "highlight": "current-row" }
+    { "date": "Mar 26", "brent": "$105.85", "jetFuel": "$197/bbl", "event": "Iran rejects US peace talks. Prices reignite. Jet fuel up 12.6% week-on-week.", "highlight": "" },
+    { "date": "Mar 28", "brent": "$112.57", "jetFuel": "$227.4/bbl", "event": "Brent closes at highest since July 2022, up 4.2% on day. Jet A1 from Singapore at $227.4/bbl.", "highlight": "current-row" }
   ],
   "cancellationTimeline": [
     { "date": "Pre-conflict", "count": "Baseline", "details": "Normal disruption levels across SEA. Typical daily: 50-100 delays, <20 cancellations region-wide.", "highlight": "" },
@@ -166,36 +171,37 @@
     { "date": "Mar 10", "count": "1,227", "details": "1,043 delays + 184 cancellations across SEA. AirAsia among hardest-hit carriers.", "highlight": "" },
     { "date": "Mid-Mar", "count": "1,000+", "details": "AeroThai reports cumulative 1,000+ flights cancelled in Thailand alone due to Gulf crisis.", "highlight": "" },
     { "date": "Mar 21", "count": "65+", "details": "65+ international/regional flights cancelled across Indonesia, Malaysia, Hong Kong, Taiwan.", "highlight": "" },
-    { "date": "Mar 25", "count": "431", "details": "325 delays + 50 cancellations in Thailand. Thai Airways, Bangkok Airways, AirAsia, Emirates affected. + 56 cancelled in Indonesia/Malaysia.", "highlight": "current-row" }
+    { "date": "Mar 25", "count": "431", "details": "325 delays + 50 cancellations in Thailand. Thai Airways, Bangkok Airways, AirAsia, Emirates affected. + 56 cancelled in Indonesia/Malaysia.", "highlight": "" },
+    { "date": "Mar 28", "count": "Coordinated cuts", "details": "Vietnamese airlines announce coordinated pullback from April 1. Vietnam Airlines suspending 7 domestic routes, cutting 23 weekly flights. VietJet cutting 8%. Restoration projected April 10-15.", "highlight": "current-row" }
   ],
-  "seaAirlineSummary": "Southeast Asian aviation is under systemic stress. Budget carriers face existential fuel economics, flag carriers are managing with rerouting and price increases, and the fuel supply chain for Vietnam specifically is in crisis mode after China and Thailand halted jet fuel exports.",
+  "seaAirlineSummary": "Southeast Asian aviation under severe stress. Fuel crisis escalating: Brent at $112.57, jet fuel at $227/bbl. Vietnamese carriers announced coordinated April flight cuts on Mar 28. Budget carriers face existential fuel economics. Flag carriers managing with rerouting and price hikes but margin pressure mounting. No relief expected until Q2 unless Middle East stabilizes.",
   "seaAirlineOverview": [
     {
       "name": "Vietnam Airlines",
       "type": "flag",
       "status": "CAUTION",
-      "impact": "Cut 23 weekly flights and suspended 7 domestic routes. 15% reduction in scheduled flights through March 31. Bloomberg reports further route suspensions likely.",
+      "impact": "Cutting 23 weekly flights and suspending 7 domestic routes from April 1. Bloomberg reports further suspensions likely. Planning 10-20% monthly cuts if jet fuel stays above $160-200/bbl.",
       "detail": "Imports 60%+ of jet fuel from China and Thailand, both of which have banned exports. Fuel delivery timelines stretched from 30 to 50+ days."
     },
     {
       "name": "VietJet Air",
       "type": "budget",
       "status": "CAUTION",
-      "impact": "Reduced flights by 8% on regional network. Facing further cuts from April 2026 as fuel squeeze tightens.",
-      "detail": "Budget model makes them highly vulnerable to fuel cost spikes of 40-60%. Connects Vietnam to Cambodia, Thailand, Laos."
+      "impact": "Reducing flights by 8% on regional network. Part of coordinated Vietnamese airline pullback announced Mar 28.",
+      "detail": "Budget model makes them highly vulnerable to 47% fuel cost spike. Connects Vietnam to Cambodia, Thailand, Laos."
     },
     {
       "name": "AirAsia (Group)",
       "type": "budget",
       "status": "CAUTION",
       "impact": "Among hardest-hit in Mar 10 cancellation wave. Philippines AirAsia suspended Manila-HCMC 3x weekly through May. Affiliate revenue losses exceeding $180M for Q1.",
-      "detail": "Thin margins, no significant fuel hedging. Thai AirAsia reporting ongoing delays at BKK and HKT airports."
+      "detail": "Thin margins, no significant fuel hedging. Thai AirAsia still operating CXR-DMK daily (FD647) but under increasing pressure."
     },
     {
       "name": "Thai Airways",
       "type": "flag",
       "status": "STABLE",
-      "impact": "Rerouting European services via northern corridor with minimal schedule impact. 74 delays but managing better than most. Raised prices 10-15%.",
+      "impact": "Rerouting European services via southern or northern corridor with minimal schedule impact. 74 delays but managing better than most. Raised prices 10-15%.",
       "detail": "Government-backed, post-restructuring. Better positioned to absorb fuel costs. BKK-CPH still operating."
     },
     {
@@ -228,22 +234,22 @@
     }
   ],
   "broaderContext": {
-    "narrative": "The Iran war has triggered a cascading energy crisis across Southeast Asia. What started as a Middle Eastern military conflict has become a fuel supply emergency for the entire region. Governments are implementing emergency measures not seen since the 1973 oil crisis, and the effects on aviation are just one symptom of a broader economic shock.",
+    "narrative": "The Iran war has triggered a cascading energy crisis across Southeast Asia. Fuel prices have roughly doubled since pre-conflict levels, with Brent hitting $112.57 on Mar 28. The coordinated Vietnamese airline pullback from April 1 marks a new phase: carriers are no longer just reacting to disruptions but planning sustained reductions. Governments are implementing emergency measures not seen since the 1973 oil crisis.",
     "policies": [
       {
         "country": "Thailand",
         "date": "Mar 6",
-        "description": "PM Order 2/2026: Banned exports of gasoline, gasohol, diesel, Jet A-1 aviation fuel, and LPG (except to Cambodia and Laos). Froze diesel prices. Required large fuel traders (100k+ tonnes/yr) to increase reserves to 1.5-3%. Oil refineries must report production, stocks, prices, and customer lists to Dept of Energy Business."
+        "description": "PM Order 2/2026: Banned exports of gasoline, gasohol, diesel, Jet A-1 aviation fuel, and LPG (except to Cambodia and Laos). Froze diesel prices. Required large fuel traders (100k+ tonnes/yr) to increase reserves to 1.5-3%."
       },
       {
         "country": "Thailand",
         "date": "Mar 10+",
-        "description": "Diesel shortage crisis deepening. Long queues at fuel stations in provinces. PM denied large-scale hoarding by distributors, saying it is everyday users panic-buying (~17M litres/day being stockpiled by consumers). Government considering revival of 1973 emergency energy law."
+        "description": "Diesel shortage crisis deepening. Long queues at fuel stations in provinces. PM denied large-scale hoarding, says everyday users panic-buying (~17M litres/day). Government considering revival of 1973 emergency energy law."
       },
       {
         "country": "China",
         "date": "Mar 11",
-        "description": "Banned refined fuel exports, including jet fuel. This directly cut off ~60% of Vietnam's jet fuel supply. China prioritizing domestic energy security over regional export commitments."
+        "description": "Banned refined fuel exports, including jet fuel. Directly cut off ~60% of Vietnam's jet fuel supply. China prioritizing domestic energy security over regional export commitments."
       },
       {
         "country": "Philippines",
@@ -252,8 +258,8 @@
       },
       {
         "country": "Vietnam",
-        "date": "Mar 2026",
-        "description": "Officials encouraged to work from home and limit travel. Vietnam Airlines and VietJet cutting flights. Fuel delivery timelines extended from 30 to 50+ days. Bracing for deeper cuts from April."
+        "date": "Mar 28",
+        "description": "Coordinated airline pullback announced. Vietnam Airlines suspending 7 domestic routes from April 1, cutting 23 weekly flights. VietJet reducing 8%. Officials encouraged to work from home. Fuel delivery timelines 50+ days. Gasoline taxes removed, cutting pump price 19%."
       },
       {
         "country": "Myanmar",
@@ -261,27 +267,29 @@
         "description": "Military junta introduced odds-and-evens driving system (fuel rationing). Alternating driving days based on license plate numbers."
       }
     ],
-    "outlook": "Industry analysts project the aviation disruption will persist through Q2 2026 unless Middle East stability improves. The Strait of Hormuz remains partially blockaded with ~20 mb/d of crude and product exports disrupted. Oil market backwardation signals continued supply tightness. For SEA specifically, the China and Thailand fuel export bans are the critical chokepoint, and there is no sign of either being lifted."
+    "outlook": "Aviation disruption will persist through Q2 2026 unless Middle East stability improves. Strait of Hormuz remains partially blockaded (~17.8M bbl/day disrupted). Iran's rejection of peace talks on Mar 26 removed near-term diplomatic hope. Oil in backwardation signals continued tightness. For SEA, the China/Thailand fuel export bans are the critical chokepoint with no sign of lifting. Vietnamese carriers project partial schedule restoration by April 10-15, contingent on fuel shipments arriving."
   },
   "searchSources": [
-    "Fortune: Current price of oil Mar 26, 2026 - Brent at $105.85-$107.99",
-    "OilPriceAPI: Brent $107.99 / WTI $94.41 as of Mar 26",
-    "CNBC: Oil market in backwardation, Mar 26, 2026",
-    "IATA Fuel Monitor: Jet fuel rose 12.6% week-on-week to $197/bbl",
-    "FinChannel: Jet fuel price surge hits tourism, reversing 2026 relief expectations",
-    "IATA Chart of the Week Mar 13: Sudden fuel price change analysis",
+    "Fortune: Brent crude at $112.57/bbl, Mar 28 2026, highest since July 2022",
+    "CNBC: Oil prices close at highest since 2022 as Iran negotiations fail, Mar 27",
+    "IATA Fuel Monitor: Jet fuel rose to $197/bbl (week of Mar 20), up 12.6% week-on-week",
+    "Bloomberg: Vietnamese airlines slash flights from April on jet fuel crunch, Mar 27",
+    "Bloomberg: Vietnam Airlines to suspend some routes as jet fuel risks rise, Mar 24",
     "Travel And Tour World: Jet fuel crisis disrupts Vietnam, Thailand, S.Korea, China",
     "Travel And Tour World: Vietnam Airlines cuts 23 weekly flights amid fuel shortage",
     "Travel And Tour World: AirAsia among carriers grounded in Mar 10 wave (184 cancellations)",
+    "Nikkei Asia: Vietnam gasoline price falls 19% after taxes removed amid energy crisis",
+    "Manila Times: Vietnam Airlines plans domestic route cuts due to jet fuel shortage, Mar 25",
     "AirHelp: 328 Thailand flights disrupted amid Middle East conflict",
     "LoyaltyLobby: AeroThai reports 1000 flights cancelled due to Gulf crisis",
-    "CNN: Middle East airspace closures reshaping global aviation, Mar 2, 2026",
+    "CNN: Middle East airspace closures reshaping global aviation, Mar 2 2026",
     "SafeAirspace.net: Iran OIIX FIR closed, Iraq/Kuwait/Syria closed",
     "OpsGroup: Middle East airspace current operational picture",
     "The National: International airlines extend Middle East suspensions, Mar 25",
-    "TDAC.info: Thailand rerouting guide for Middle East airspace closures",
+    "Euronews: Lufthansa and Air France extend suspensions, Emirates aiming 100% capacity",
+    "Travel And Tour World: Emirates, Qatar, Etihad, Thai Airways adjust London-Bangkok services",
+    "Skysonar: Middle East airspace closures 2026 traveler guide",
     "The Diplomat: Southeast Asia scramble for energy, Mar 2026",
-    "Nomad Lawyer: Vietnam travel disruptions fuel shortage Mar 2026",
-    "SimpleFlying: Airlines warn jet fuel could run dry within weeks"
+    "Nomad Lawyer: Vietnam travel disruptions fuel shortage Mar 2026"
   ]
 }
