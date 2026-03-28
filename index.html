@@ -76,26 +76,24 @@
       </div>
     </section>
 
-    <!-- OVERALL RISK -->
-    <section class="panel risk-overview" id="riskOverview">
-      <div class="risk-ring">
-        <svg viewBox="0 0 120 120">
-          <circle class="risk-ring__bg" cx="60" cy="60" r="52"></circle>
-          <circle class="risk-ring__fill" id="riskRingFill" cx="60" cy="60" r="52"
-            stroke-dasharray="326.73"
-            stroke-dashoffset="326.73"></circle>
-        </svg>
-        <div class="risk-ring__score" id="riskScore">--</div>
-      </div>
-      <div class="risk-overview__text">
-        <div class="risk-overview__label-tag unknown" id="riskLabel">LOADING</div>
-        <p class="risk-overview__summary" id="riskSummary">Loading dashboard data...</p>
-      </div>
-    </section>
-
     <!-- SAVED FLIGHTS (collapsed by default) -->
     <details class="saved-flights" id="savedFlights">
       <summary class="saved-flights__toggle">Svo's Trip Home</summary>
+      <section class="panel risk-overview" id="riskOverview">
+        <div class="risk-ring">
+          <svg viewBox="0 0 120 120">
+            <circle class="risk-ring__bg" cx="60" cy="60" r="52"></circle>
+            <circle class="risk-ring__fill" id="riskRingFill" cx="60" cy="60" r="52"
+              stroke-dasharray="326.73"
+              stroke-dashoffset="326.73"></circle>
+          </svg>
+          <div class="risk-ring__score" id="riskScore">--</div>
+        </div>
+        <div class="risk-overview__text">
+          <div class="risk-overview__label-tag unknown" id="riskLabel">LOADING</div>
+          <p class="risk-overview__summary" id="riskSummary">Loading dashboard data...</p>
+        </div>
+      </section>
       <section class="flights-grid" id="flightsGrid">
         <!-- Populated by JS -->
       </section>

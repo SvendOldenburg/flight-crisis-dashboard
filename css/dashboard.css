@@ -496,6 +496,12 @@ body {
   border-bottom: none;
 }
 
+.saved-flights[open] > .risk-overview {
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0;
+}
+
 .saved-flights[open] > .flights-grid {
   border: 1px solid var(--border);
   border-top: none;
